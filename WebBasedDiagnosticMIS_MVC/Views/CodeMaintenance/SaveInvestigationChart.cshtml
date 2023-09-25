@@ -1,0 +1,178 @@
+﻿@using WebBasedDiagnosticMIS_MVC.Models
+
+@{
+    ViewBag.Title = "SaveInvestigationChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<DepartmentInfo> ProjectList = ViewBag.GetAllProject;
+    List<DepartmentInfo> SubProjectList = ViewBag.GetAllSubProject;
+    List<DepartmentInfo> SubProjectDeptList = ViewBag.GetAllSubProjectDept;
+    List<InvestigationChart> investigationList = ViewBag.InvestigationList;
+    ActionResponse response = ViewBag.response;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Add New Investigation</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1">
+                        <form class="form-horizontal" id="investigationChartSave" method="POST">
+                            @if (response != null)
+                            {
+                                <div class="alert alert-@response.Class alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    @response.Message
+                                </div>
+                            }
+                            <div class="form-group">
+                                <label for="Code" class="col-sm-4 control-label">Code</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="Code" id="Code" placeholder="Code">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default" id="getItem">Go</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name" class="col-sm-4 control-label">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="Name" id="Name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Project" class="col-sm-4 control-label">Main Project</label>
+                                <div class="col-sm-8">
+                                    <select id="Project" name="Project" class="form-control">
+                                        @foreach (var item in ProjectList)
+                                        {
+                                            <option value="@item.DepartmentId">@item.DepartmentName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="SubProject" class="col-sm-4 control-label">Sub Project</label>
+                                <div class="col-sm-8">
+                                    <select id="SubProject" name="SubProject" class="form-control">
+                                        @foreach (var item in SubProjectList)
+                                        {
+                                            <option value="@item.DepartmentId">@item.DepartmentName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="SubProjectDept" class="col-sm-4 control-label">Sub Project Dept.</label>
+                                <div class="col-sm-8">
+                                    <select id="SubProjectDept" name="SubProjectDept" class="form-control">
+                                        @foreach (var item in SubProjectDeptList)
+                                        {
+                                            <option value="@item.DepartmentId">@item.DepartmentName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Price" class="col-sm-4 control-label">Charge</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="Price" name="Price" class="form-control" placeholder="Price" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="LessFixedAmount" class="col-sm-4 control-label">Less Fixed Amt</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="LessFixedAmount" name="LessFixedAmount" class="form-control" placeholder="Less Fixed Amount" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="RefFee" class="col-sm-4 control-label">Ref.Fee</label>
+                                <div class="col-sm-5">
+                                    <input type="text" id="RefFee" name="RefFee" class="form-control" placeholder="Refferal Fee" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="RefFeeType" name="RefFeeType" class="form-control">
+                                        <option value="0">Tk</option>
+                                        <option value="1">%</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="NormalValue" class="col-sm-4 control-label">Normal Value</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="NormalValue" name="NormalValue" class="form-control" placeholder="Normal Value" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ReportFileName" class="col-sm-4 control-label">Report File Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="ReportFileName" name="ReportFileName" class="form-control" placeholder="Report File Name" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ReportDeliveryAfter" class="col-sm-4 control-label">Report Delivery After</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="ReportDeliveryAfter" name="ReportDeliveryAfter" class="form-control" placeholder="Report Delivery Duration" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" class="btn btn-default">Save</button>
+                                    <button type="submit" class="btn btn-default" id="update" name="update">Update</button>
+                                </div>
+                            </div>
+
+                            <br /><br />
+                        </form>
+                    </div>
+                </div>
+                <!-- /.row (nested) -->
+
+                <div class="row">
+                    <div class="col-sm-10">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in investigationList)
+                                {
+                                    <tr>
+                                        <td>@item.Code</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Price</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+@section styles{
+    <link href="~/Styles/investigationChartEntry.css" rel="stylesheet" />
+}
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/page/saveInvestigationChart.js")
+
+}
+

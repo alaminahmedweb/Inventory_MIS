@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Stock Receive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h3>Stock Receive</h3></div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="txtReceiptNo">Receipt No</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="txtReceiptNo" placeholder="Enter Receipt No" autofocus />
+                    </div>
+                    <label class="col-sm-2 control-label" for="txtReceiptDate">Receipt Date</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control " id="txtReceiptDate" placeholder="Receipt Date" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="txtSupplierId">Supplier Name</label>
+                    <div class="col-sm-4">
+                        <select class="form-control select2" id="txtSupplierId" name="txtSupplierId">
+                            @{
+                                <option value="0">---Select---</option>
+                                foreach (var alist in @ViewBag.SupplierList)
+                                {
+                                    <option value=@alist.PartyId> @alist.PartyName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label" for="txtMobileNo">Mobile No</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="txtMobileNo" placeholder="Mobile No" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="txtAddress">Supplier Address</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="txtAddress" placeholder="Address" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="table-scrollable">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="thead-blue text-center">
+                                <tr>
+                                    <th class="col-sm-1"> ProductID </th>
+                                    <th class="col-sm-3"> ProductName </th>
+                                    <th class="col-sm-3"> Unit </th>
+                                    <th class="col-sm-1"> UnitPrice </th>
+                                    <th class=""> Quantity </th>
+                                    <th class=""> Total </th>
+                                    <th class=""> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody" class="text-center"></tbody>
+                        </table>
+                    </div>
+                    <table class="entry-form">
+                        <tr>
+                            <td class="col-sm-6">
+                                <select class="form-control select2" id="ProductId" name="ProductId">
+                                    @{
+                                        <option value="0">---Select---</option>
+                                        foreach (var list in @ViewBag.GetProductList)
+                                        {
+                                            <option value=@list.ProductId> @list.ProductName</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td class="col-sm-2"><input class="form-control" placeholder="Unit" id="Unit"  type="text"></td>
+                            <td class="col-sm-2"><input class="form-control" placeholder="UnitPrice" id="UnitPrice" type="text"></td>
+                            <td class="col-sm-2"><input class="form-control" placeholder="Quantity" id="txtQuantity" type="text" maxlength="8"></td>
+                            <td class=""><button type="button" class="btn btn-sm btn-blue" id="btnAdd">Add</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="txtRemarks">Remarks</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="txtRemarks" placeholder="Remarks" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Total Product: </label>
+                    <div class="col-sm-2 has-error">
+                        <input type="text" class="form-control" id="txtTotalProduct" />
+                    </div>
+
+                    <label class="col-sm-2 control-label">Total Price: </label>
+                    <div class="col-sm-2 has-error">
+                        <input type="text" class="form-control" id="TotalPrice" />
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <input type="button" class="btn btn-sm btn-success" id="btnSave" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/datepicker")
+    <link href="~/Styles/StockReceive.css" rel="stylesheet" />
+    <link href="~/Content/select2/select2.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/Scripts/page/StockReceive.js")
+    @Scripts.Render("~/Content/select2/select2.js")
+}

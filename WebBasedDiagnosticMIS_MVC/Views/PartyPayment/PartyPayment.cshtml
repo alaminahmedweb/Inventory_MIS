@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "PartyPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Party Payment</h3>
+            </div>
+            <div class="panel-body">
+                <form class="">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtCustomerId">Customer</label>
+                        <div class="col-sm-10 CustomerId">
+                            <select class="form-control select2" id="txtCustomerId" name="txtCustomerId">
+                                @{
+                                    <option value="0">---Select---</option>
+                                    foreach (var alist in @ViewBag.CustomerList)
+                                    {
+                                        <option value=@alist.PartyId> @alist.PartyName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtBalanceAmount">Total Due</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtBalanceAmount" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtLessAmount">Less</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control isnumber" id="txtLessAmount" maxlength="10" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtPaidAmount">Paid</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control isnumber" id="txtPaidAmount" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtDueAmount"> Rest Due</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtDueAmount" maxlength="10" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtRemarks">Remarks</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtRemarks" placeholder="Remarks" maxlength="50" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-right">
+                        <input type="button" class="btn btn-sm btn-success" id="btnSave" value="Save" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/Content/datepicker")
+    <link href="~/Styles/StockReceive.css" rel="stylesheet" />
+    <link href="~/Content/select2/select2.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/Scripts/page/PartyPayment.js")
+    @Scripts.Render("~/Content/select2/select2.js")
+}

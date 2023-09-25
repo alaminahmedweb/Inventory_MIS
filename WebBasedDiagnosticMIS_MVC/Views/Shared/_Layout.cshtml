@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - Web Based Inventory MIS</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("Styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Content/jquery.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+<body ng-app="myModule">
+    <div id="wrapper">
+        <!-- Navigation -->
+
+      <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+    	    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+			    <span class="sr-only">Toggle navigation</span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+		    </button>
+		    @Html.ActionLink("Inventory MIS", "Index", "Home", null, new { @class = "navbar-brand" })
+	    </div>
+	
+	    <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Profile</a></li>
+                <li><a href="@Url.Action("UserLoginNew", "NewUserLogin")"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+	    </div><!-- /.nav-collapse -->
+      </nav>
+        <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")"><i class="fa fa-home fa-fw"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="javascript:; @Url.Action("SaveInvestigationChart", "CodeMaintenance")" data-toggle="collapse" data-target="#demo"><i class="fa fa-plus-circle fa-fw"></i> Inventory Activities<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo" class="collapse">
+                                <li>
+                                    <a href="@Url.Action("SaveStockReceive", "StockReceive")"><i class="fa fa-plus-circle fa-fw"></i> Product Receive</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("StockIssue", "StockIssue")"><i class="fa fa-plus-circle fa-fw"></i> Product Issue</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("PartyPayment", "PartyPayment")"><i class="fa fa-plus-circle fa-fw"></i> Party Payment</a>                                
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("MISReport", "MISReport")"><i class="fa fa-print"></i> MIS Reports</a>
+                        </li>
+                        <li>
+                            <a href="javascript:; @Url.Action("SaveInvestigationChart", "CodeMaintenance")" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-wrench"></i> Settings<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo2" class="collapse">
+                                <li>
+                                    <a href="@Url.Action("SaveProductList", "Inventory")"><i class="fa fa-plus-circle fa-fw"></i> New Product Entry</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("SaveNewParty", "Inventory")"><i class="fa fa-plus-circle fa-fw"></i> New Party Entry</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+
+        <div id="page-wrapper">
+            @RenderBody()
+            <footer>Designed And Developed By- Md. Alamin</footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/pluginJs")
+    @Scripts.Render("~/bundles/customJs")
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
+</body>
+</html>

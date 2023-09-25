@@ -1,0 +1,15 @@
+﻿.login_form .panel-heading .panel-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .controls {
+            text-align: center;
+        }
+
+            .controls a {
+                text-align: center;
+                width: 100%;
+            }

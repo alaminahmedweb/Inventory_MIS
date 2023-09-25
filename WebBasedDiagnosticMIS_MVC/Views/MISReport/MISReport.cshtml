@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "MISReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Report</h3>
+            </div>
+            <div class="panel-body">
+                <form class="item-reg">
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtDateFrom">Date From</label>
+                        <div class="col-sm-2"><input type="text" class="form-control datepicker" id="txtDateFrom" /></div>
+                        <label class="col-sm-2 control-label" for="txtDateTo">Date To</label>
+                        <div class="col-sm-2"><input type="text" class="form-control datepicker" id="txtDateTo" /></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtSupplierId">Supplier Name</label>
+                        <div class="col-sm-6">
+                            <select class="form-control select2" id="txtSupplierId" name="txtSupplierId">
+                                @{
+                                    <option value="0">---Select---</option>
+                                    foreach (var alist in @ViewBag.SupplierList)
+                                    {
+                                        <option value=@alist.PartyId> @alist.PartyName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="txtItemId">Item Name</label>
+                        <div class="col-sm-6">
+                            <select class="form-control select2" id="txtItemId" name="txtItemId">
+                                @{
+                                    <option value="0">---Select---</option>
+                                    foreach (var alist in @ViewBag.ProductList)
+                                    {
+                                        <option value=@alist.ProductId> @alist.ProductName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body mis-report">
+                <div class="form-group">
+                    <div class="col-sm-2"><button type="button" id="btnBalanceReport" class="btn btn-danger btn-block">Balance Report</button></div>
+                    <div class="col-sm-2"><button type="button" id="btnProductReceivingReport" class="btn btn-danger btn-block">Stock Receiving Report</button></div>
+                    <div class="col-sm-2"><button type="button" id="btnProductIssueingReport" class="btn btn-danger btn-block">Stock Issueing Report</button></div>
+                    <div class="col-sm-2"><button type="button" id="btnPartyDueList" class="btn btn-danger btn-block">Party Due List</button></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Styles {
+    @Styles.Render("~/Content/datepicker")
+    <link href="~/Styles/StockReceive.css" rel="stylesheet" />
+    <link href="~/Content/select2/select2.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/Scripts/page/MISReport.js")
+    @Scripts.Render("~/Content/select2/select2.js")
+}
+
+
